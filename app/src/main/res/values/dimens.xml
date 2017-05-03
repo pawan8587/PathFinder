@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_back_button_margin">5dp</dimen>
+    <dimen name="txt_14sp">15sp</dimen>
+</resources>
