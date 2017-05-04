@@ -433,7 +433,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
             try {
                 LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
