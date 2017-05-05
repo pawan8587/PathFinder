@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Google Path Finder</string>
-    <string name="Api_key">AIzaSyAiwZT6g1DGwczk9aTo2uBaDSyNFVxyOCg</string>
+    <string name="Api_key">AIzaSyBboL9VxiveE1Z3dfBR43ZM3_jO1AHoYRQ</string>
+    <!--<string name="Api_key">AIzaSyAiwZT6g1DGwczk9aTo2uBaDSyNFVxyOCg</string>-->
+    <!--<string name="Api_key">AIzaSyAiFpFd85eMtfbvmVNEYuNds5TEF9FjIPI</string>-->
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -8,5 +11,12 @@
     <string name="no_geocoder_available">No geocoder available</string>
 
 
+    <string name="key_binding_default_toolbar_name">Messages</string>
+
+    <string name="BackDropBottomSheetBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.BackdropBottomSheetBehavior</string>
+    <string name="BottomSheetBehaviorGoogleMapsLike">com.enest.pc_68.pathfinder.coordinatorCustomLibs.BottomSheetBehaviorGoogleMapsLike</string>
+    <string name="ScrollAwareFABBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.ScrollAwareFABBehavior</string>
+    <string name="MergedAppBarLayoutBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.lib.MergedAppBarLayoutBehavior</string>
+    <string name="ScrollingAppBarLayoutBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.ScrollingAppBarLayoutBehavior</string>
 
 </resources>

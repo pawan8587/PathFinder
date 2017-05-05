@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".FabCollasping"
             android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,8 @@
         <activity
             android:name=".visitConfirmation"
             android:theme="@style/NoActionBarTheme" />
-        <activity android:name=".LayoutCheck"></activity>
+        <activity android:name=".LayoutCheck" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

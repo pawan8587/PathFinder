@@ -2,15 +2,12 @@ package com.enest.pc_68.pathfinder;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -120,7 +117,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API).addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build();
-
         mGoogleApiClient.connect();
 
 
@@ -181,11 +177,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         } else {
 
-            visitConfirmation.source=null;
-            visitConfirmation.destination=null;
-            visitConfirmation.source=SourceLocation;
-            visitConfirmation.destination=DestinationLocation;
-            startActivity(new Intent(MainActivity.this,visitConfirmation.class));
+            visitConfirmation.source = null;
+            visitConfirmation.destination = null;
+            visitConfirmation.source = SourceLocation;
+            visitConfirmation.destination = DestinationLocation;
+            startActivity(new Intent(MainActivity.this, visitConfirmation.class));
         }
 
     }
@@ -266,7 +262,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
 
         final int[] init_loc = {0};
@@ -282,24 +278,29 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             googleMap.setMyLocationEnabled(true);
         }
 
+        ///********************************* Set Current Location ****************************///
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-        //Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (googleMap != null) {
+            googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+
+                @Override
+                public void onMyLocationChange(Location location) {
+                    // TODO Auto-generated method stub
 
 
-        currentlatlang = new LatLng(location.getLatitude(), location.getLatitude());
-        //location=googleMap.getMyLocation();
-        //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(new GoogleApiClient.Builder(getApplicationContext()).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build());
-        if (location != null) {
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 2));
+                    if (location != null) {
+                        googleMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_orange)));
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 2));
 
-            CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(location.getLatitude(), location.getLongitude())).zoom(10).bearing(90).tilt(40).build();                   // Creates a CameraPosition from the builder
-            googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(new LatLng(location.getLatitude(), location.getLongitude())).zoom(10).bearing(90).tilt(40).build();                   // Creates a CameraPosition from the builder
+                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                    }
+
+                }
+            });
+
         }
 
-        googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_orange)).position(currentlatlang));
 
         googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_blue)).position(car1));
 
@@ -384,7 +385,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void changeMap(Location location) {
+/*    private void changeMap(Location location) {
 
         Log.d(TAG, "Reaching map" + googleMap);
 
@@ -417,7 +418,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(getApplicationContext(), "Sorry! unable to create maps", Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -426,7 +427,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            changeMap(mLastLocation);
+            //changeMap(mLastLocation);
             Log.d(TAG, "ON connected");
 
         } else
@@ -457,6 +458,5 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
 
 }

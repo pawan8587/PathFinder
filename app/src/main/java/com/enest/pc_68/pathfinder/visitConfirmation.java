@@ -2,7 +2,6 @@ package com.enest.pc_68.pathfinder;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -24,14 +22,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import android.widget.Toolbar;
 
 import com.enest.pc_68.pathfinder.Modules.DirectionFinder;
 import com.enest.pc_68.pathfinder.Modules.DirectionFinderListener;
 import com.enest.pc_68.pathfinder.Modules.Route;
-import com.enest.pc_68.pathfinder.helper.CircleImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -52,7 +51,7 @@ import java.util.List;
 
 import static com.enest.pc_68.pathfinder.R.id.map;
 
-public class visitConfirmation extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class visitConfirmation extends FragmentActivity implements OnMapReadyCallback, DirectionFinderListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
 
     static String source = null;
@@ -65,8 +64,11 @@ public class visitConfirmation extends FragmentActivity implements OnMapReadyCal
     private GoogleMap googleMap;
     private CoordinatorLayout layoutRequestPickupDialog;
     private BottomSheetBehavior mBottomSheetBehavior;
-    private BottomSheetDialog bottomSheetDialog;
-    private CircleImageView circleImageViewUberGo;
+    private BottomSheetDialog bottomSheetDialogCarOne,bottomSheetDialogCarTwo,bottomSheetDialogCarThree;
+    private ToggleButton toggleButtonViewCarTypeOne,toggleButtonCarTypeTwo,toggleButtonCarTypeThree;
+    private Boolean carOneToggle=false,carTwoToggle=false,carThreeToggle=false;
+
+    private TextView textViewCarType,TextViewCarFacility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,15 +80,27 @@ public class visitConfirmation extends FragmentActivity implements OnMapReadyCal
         mapFragment.getMapAsync(this);
 
 
-        layoutRequestPickupDialog= (CoordinatorLayout) findViewById(R.id.layoutRequestPickupDialog);
+        //layoutRequestPickupDialog= (CoordinatorLayout) findViewById(R.id.layoutRequestPickupDialog);
 
-        circleImageViewUberGo= (CircleImageView) findViewById(R.id.circleImageViewUberGo);
+        toggleButtonViewCarTypeOne= (ToggleButton) findViewById(R.id.toggleButtonViewCarTypeOne);
+        toggleButtonViewCarTypeOne.setOnClickListener(this);
+
+        toggleButtonCarTypeTwo= (ToggleButton) findViewById(R.id.toggleButtonCarTypeTwo);
+        toggleButtonCarTypeTwo.setOnClickListener(this);
+
+        toggleButtonCarTypeThree= (ToggleButton) findViewById(R.id.toggleButtonCarTypeThree);
+        toggleButtonCarTypeThree.setOnClickListener(this);
+
+
+
+
+
 
         if (source == null && source.length() < 0) {
-            Toast.makeText(this, "Please enter origin address!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Origin address Not Found!", Toast.LENGTH_SHORT).show();
             return;
         } else if (destination == null && destination.length() < 0) {
-            Toast.makeText(this, "Please enter destination address!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Destination address Not Found!", Toast.LENGTH_SHORT).show();
             return;
         } else {
 
@@ -98,21 +112,20 @@ public class visitConfirmation extends FragmentActivity implements OnMapReadyCal
         }
 
 
-        circleImageViewUberGo.setOnClickListener(new View.OnClickListener() {
+  /*      toggleButtonViewCarTypeOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(),"Okkk",Toast.LENGTH_LONG).show();
                 if (dismissDialog()) {
                     return;
                 }
                 View view = getLayoutInflater().inflate(R.layout.layout_far_description_sheet, null);
-                bottomSheetDialog = new BottomSheetDialog(visitConfirmation.this);
-                bottomSheetDialog.getWindow().setLayout(CoordinatorLayout.LayoutParams.FILL_PARENT, CoordinatorLayout.LayoutParams.FILL_PARENT);
-                bottomSheetDialog.setContentView(view);
-                bottomSheetDialog.show();
+                bottomSheetDialogCarOne = new BottomSheetDialog(visitConfirmation.this);
+                //bottomSheetDialogCarOne.getWindow().setLayout(CoordinatorLayout.LayoutParams.FILL_PARENT, CoordinatorLayout.LayoutParams.FILL_PARENT);
+                bottomSheetDialogCarOne.setContentView(view);
+                bottomSheetDialogCarOne.show();
             }
-        });
+        });*/
         //initBottomSheet();
     }
 
@@ -289,16 +302,117 @@ public class visitConfirmation extends FragmentActivity implements OnMapReadyCal
     }
 
 
-    private boolean dismissDialog() {
-        if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
-            bottomSheetDialog.dismiss();
+    private boolean dismissDialogCarOne() {
+        if (bottomSheetDialogCarOne != null && bottomSheetDialogCarOne.isShowing()) {
+            bottomSheetDialogCarOne.dismiss();
+            carOneToggle=false;
             return true;
         }
 
-
-
+        return false;
+    }
+    private boolean dismissDialogCarTwo() {
+        if (bottomSheetDialogCarTwo != null && bottomSheetDialogCarTwo.isShowing()) {
+            bottomSheetDialogCarTwo.dismiss();
+            carTwoToggle=false;
+            return true;
+        }
         return false;
     }
 
+    private boolean dismissDialogCarThree() {
+        if (bottomSheetDialogCarTwo != null && bottomSheetDialogCarTwo.isShowing()) {
+            bottomSheetDialogCarTwo.dismiss();
+            carTwoToggle=false;
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.toggleButtonViewCarTypeOne:
+                toggleButtonViewCarTypeOne.setChecked(true);
+                toggleButtonCarTypeTwo.setChecked(false);
+                toggleButtonCarTypeThree.setChecked(false);
+                handleCarToggle(1);
+                break;
+            case R.id.toggleButtonCarTypeTwo:
+                toggleButtonViewCarTypeOne.setChecked(false);
+                toggleButtonCarTypeTwo.setChecked(true);
+                toggleButtonCarTypeThree.setChecked(false);
+                handleCarToggle(2);
+                break;
+
+            case R.id.toggleButtonCarTypeThree:
+                toggleButtonViewCarTypeOne.setChecked(false);
+                toggleButtonCarTypeTwo.setChecked(false);
+                toggleButtonCarTypeThree.setChecked(true);
+                handleCarToggle(3);
+                break;
+        }
+    }
+
+    private void handleCarToggle(int i) {
+        View view = getLayoutInflater().inflate(R.layout.layout_far_description_sheet, null);
+        textViewCarType= (TextView) view.findViewById(R.id.textViewCarType);
+        TextViewCarFacility= (TextView) view.findViewById(R.id.TextViewCarFacility);
+        switch (i)
+        {
+            case 1:
+                if (carOneToggle==true)
+                {
+                    if (dismissDialogCarOne()) {
+                        return;
+                    }
+                    textViewCarType.setText("UBERGO");
+                    TextViewCarFacility.setText("Affordable,every rides UBERGO");
+                    bottomSheetDialogCarOne = new BottomSheetDialog(visitConfirmation.this);
+                    //bottomSheetDialogCarOne.getWindow().setLayout(CoordinatorLayout.LayoutParams.FILL_PARENT, CoordinatorLayout.LayoutParams.FILL_PARENT);
+                    bottomSheetDialogCarOne.setContentView(view);
+                    bottomSheetDialogCarOne.show();
+                }
+                carOneToggle=true;
+                carTwoToggle=false;
+                carThreeToggle=false;
+                break;
+            case 2:
+                if (carTwoToggle==true)
+                {
+                    if (dismissDialogCarTwo()) {
+                        return;
+                    }
+                    textViewCarType.setText("UBERX");
+                    TextViewCarFacility.setText("Affordable,every rides UBERX");
+                    bottomSheetDialogCarTwo = new BottomSheetDialog(visitConfirmation.this);
+                    //bottomSheetDialogCarOne.getWindow().setLayout(CoordinatorLayout.LayoutParams.FILL_PARENT, CoordinatorLayout.LayoutParams.FILL_PARENT);
+                    bottomSheetDialogCarTwo.setContentView(view);
+                    bottomSheetDialogCarTwo.show();
+                }
+                carOneToggle=false;
+                carTwoToggle=true;
+                carThreeToggle=false;
+                break;
+            case 3:
+                if (carThreeToggle==true)
+                {
+                    if (dismissDialogCarThree()) {
+                        return;
+                    }
+                    textViewCarType.setText("UBERXL");
+                    TextViewCarFacility.setText("Affordable,every rides UBERXL");
+                    bottomSheetDialogCarThree = new BottomSheetDialog(visitConfirmation.this);
+                    //bottomSheetDialogCarOne.getWindow().setLayout(CoordinatorLayout.LayoutParams.FILL_PARENT, CoordinatorLayout.LayoutParams.FILL_PARENT);
+                    bottomSheetDialogCarThree.setContentView(view);
+                    bottomSheetDialogCarThree.show();
+                }
+                carOneToggle=false;
+                carTwoToggle=false;
+                carThreeToggle=true;
+                break;
+        }
+    }
 }
 

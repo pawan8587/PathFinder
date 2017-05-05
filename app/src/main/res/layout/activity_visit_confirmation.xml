@@ -19,6 +19,16 @@
         app:contentInsetStart="0dp"
         app:theme="@style/CustomActionBar" />
 
+    <ImageButton
+        android:layout_alignParentStart="true"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/ic_arrow_back"
+        android:visibility="visible"
+        android:background="@android:color/transparent"
+        android:layout_alignParentLeft="true" />
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -26,22 +36,19 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/layoutRequestPickupDialog"/>
 
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/layoutRequestPickupDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
         <LinearLayout
+            android:id="@+id/layoutRequestPickupDialog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_alignParentBottom="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <include
             layout="@layout/layout_request_pickup_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
