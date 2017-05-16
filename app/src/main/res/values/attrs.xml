@@ -8,7 +8,11 @@
     </declare-styleable>
 
     <declare-styleable name="CustomBottomSheetBehavior">
-        <attr name="anchorPoint" format="dimension"/>
+        <attr name="anchorPoint" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="BottomSheetCoordinatorLayout">
+        <attr name="appBarLayout" format="reference" />
     </declare-styleable>
 
 </resources>

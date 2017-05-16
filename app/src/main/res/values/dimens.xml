@@ -13,12 +13,11 @@
     <dimen name="car_image_size">90dp</dimen>
     <dimen name="car_name_text_size">17sp</dimen>
 
-
-
-
+    
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="anchor_point">570dp</dimen>
     <dimen name="bottom_sheet_peek_height">?attr/actionBarSize</dimen>
+    <dimen name="card_margin">10dp</dimen>
 
 
 </resources>

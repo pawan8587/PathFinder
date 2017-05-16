@@ -9,11 +9,37 @@
     </style>
 
 
-
     <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
+
+
+    <style name="MainAppBarStyle" parent="Widget.Design.AppBarLayout">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="MainToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="BottomSheetAppBarStyle" parent="Widget.Design.AppBarLayout">
+        <item name="android:theme">@style/Theme.AppCompat.Light</item>
+    </style>
+
+    <style name="BottomSheetToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="ScrollItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
+
 
 
     <style name="CustomActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">

@@ -13,10 +13,10 @@
 
     <string name="key_binding_default_toolbar_name">Messages</string>
 
-    <string name="BackDropBottomSheetBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.BackdropBottomSheetBehavior</string>
-    <string name="BottomSheetBehaviorGoogleMapsLike">com.enest.pc_68.pathfinder.coordinatorCustomLibs.BottomSheetBehaviorGoogleMapsLike</string>
-    <string name="ScrollAwareFABBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.ScrollAwareFABBehavior</string>
-    <string name="MergedAppBarLayoutBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.lib.MergedAppBarLayoutBehavior</string>
-    <string name="ScrollingAppBarLayoutBehavior">com.enest.pc_68.pathfinder.coordinatorCustomLibs.ScrollingAppBarLayoutBehavior</string>
+
+    <string name="coordinator_layout_bottom_sheet_behavior" translatable="false">com.enest.pc_68.pathfinder.bscl.CoordinatorLayoutBottomSheetBehavior</string>
+
+    <string name="title_bottom_sheet">Bottom Sheet</string>
+    <string name="title_main">Main Toolbar</string>
 
 </resources>

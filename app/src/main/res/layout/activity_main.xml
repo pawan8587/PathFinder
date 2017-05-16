@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.enest.pc_68.pathfinder.MainActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -93,7 +96,6 @@
 
 
     </LinearLayout>
-
     </android.support.v7.widget.Toolbar>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -119,3 +121,54 @@
 
         </RelativeLayout>
 </RelativeLayout>
+
+
+    <com.enest.pc_68.pathfinder.bscl.BottomSheetCoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="16dp"
+        android:orientation="vertical"
+        app:appBarLayout="@+id/bottom_sheet_appbar"
+        app:behavior_peekHeight="?attr/actionBarSize"
+        app:layout_behavior="@string/coordinator_layout_bottom_sheet_behavior">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/bottom_sheet_appbar"
+            style="@style/BottomSheetAppBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@color/laenger10" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/bottom_sheet_toolbar"
+                    style="@style/BottomSheetToolbarStyle"
+                    android:layout_width="match_parent"
+                    app:title="@string/title_bottom_sheet" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/laenger20"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <include layout="@layout/layout_messages" />
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.enest.pc_68.pathfinder.bscl.BottomSheetCoordinatorLayout>
+</android.support.design.widget.CoordinatorLayout>
